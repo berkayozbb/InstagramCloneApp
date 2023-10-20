@@ -49,7 +49,7 @@ class createPasswordVC: UIViewController {
                     
                     var firestoreReference : DocumentReference? = nil
                     
-                    let firestoreUser = ["userId" : Auth.auth().currentUser!.uid,"profilePicture" : "https://w7.pngwing.com/pngs/205/731/png-transparent-default-avatar-thumbnail.png"]
+                    let firestoreUser = ["userId" : Auth.auth().currentUser!.uid,"profilePicture" : "https://w7.pngwing.com/pngs/205/731/png-transparent-default-avatar-thumbnail.png", "name" : "", "bio" : ""]
                     
                     firestoreReference = firestoreDatabase.collection("Users").addDocument(data: firestoreUser, completion: { error in
                         if error != nil{
