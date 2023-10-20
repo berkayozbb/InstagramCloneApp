@@ -8,6 +8,8 @@
 import UIKit
 import Firebase
 import FirebaseStorage
+import Lottie
+import Dispatch
 
 class profileVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -39,6 +41,9 @@ class profileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
     @IBOutlet var bioLabel: UILabel!
     
     
+    private var animationView: LottieAnimationView?
+    private let dispatchGroup = DispatchGroup()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,9 +66,26 @@ class profileVC: UIViewController, UIImagePickerControllerDelegate, UINavigation
         fetchBioData()
         fetchProfilePicture()
         fetchNameData()
-        Task {
-            await getDataFromFirestore()
-        }
+        
+            animationView = .init(name: "loader.json")
+            animationView!.frame = view.bounds
+            animationView!.contentMode = .scaleAspectFit
+            animationView!.loopMode = .loop
+            animationView!.animationSpeed = 1.5
+            view.addSubview(animationView!)
+            animationView!.play()
+            dispatchGroup.enter() // Dispatch Group'a giriş yapın
+
+                Task {
+                    await getDataFromFirestore()
+                    
+                    dispatchGroup.leave() // Dispatch Group'tan çıkış yapın
+                }
+                
+                // Dispatch Group'un bitişini bekleyin ve animasyonu gizleyin
+                dispatchGroup.notify(queue: .main) {
+                    self.animationView!.removeFromSuperview()
+                }
     }
     
     func getDataFromFirestore() async {

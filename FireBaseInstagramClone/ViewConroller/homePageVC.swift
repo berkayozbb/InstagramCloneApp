@@ -10,10 +10,15 @@ import Firebase
 import FirebaseStorage
 import SDWebImage
 import Dispatch
+import Lottie
+import SwiftUI
 
 class homePageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet var tableView: UITableView!
+    
+    private var animationView: LottieAnimationView?
+    private let dispatchGroup = DispatchGroup()
     
     var usernameArray = [String]()
     var userIdArray = [String]()
@@ -27,9 +32,25 @@ class homePageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var common = Common()
     
     override func viewWillAppear(_ animated: Bool) {
-        Task {
-            await getDataFromFirestore()
-        }
+        animationView = .init(name: "loader.json")
+        animationView!.frame = view.bounds
+        animationView!.contentMode = .scaleAspectFit
+        animationView!.loopMode = .loop
+        animationView!.animationSpeed = 1.5
+        view.addSubview(animationView!)
+        animationView!.play() 
+        dispatchGroup.enter() // Dispatch Group'a giriş yapın
+
+            Task {
+                await getDataFromFirestore()
+                
+                dispatchGroup.leave() // Dispatch Group'tan çıkış yapın
+            }
+            
+            // Dispatch Group'un bitişini bekleyin ve animasyonu gizleyin
+            dispatchGroup.notify(queue: .main) {
+                self.animationView!.removeFromSuperview()
+            }
     }
     
     func getDataFromFirestore() async {
@@ -71,6 +92,7 @@ class homePageVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
                 
                 // Profil fotoğraflarını al
+                
                 for userId in self.userIdArray {
                     let ppSnapshot = try await firestoreDatabase.collection("Users").whereField("userId", isEqualTo: userId).getDocuments()
                     if let userDocument = ppSnapshot.documents.first, let profilePicture = userDocument.get("profilePicture") as? String {

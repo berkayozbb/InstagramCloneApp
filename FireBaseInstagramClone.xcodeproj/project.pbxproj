@@ -25,6 +25,7 @@
 		BE637EDE2AE1E649007C44BD /* changeNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE637EDD2AE1E649007C44BD /* changeNameVC.swift */; };
 		BE637EE02AE1E663007C44BD /* changeUsernameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE637EDF2AE1E663007C44BD /* changeUsernameVC.swift */; };
 		BE637EE22AE1E678007C44BD /* changeBioVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE637EE12AE1E678007C44BD /* changeBioVC.swift */; };
+		BE6A19DB2AE291060000809C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = BE6A19DA2AE291060000809C /* Lottie */; };
 		BE7236D32AE20865007E188E /* profileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7236D22AE20865007E188E /* profileCollectionViewCell.swift */; };
 		BE7C6F262ADFFD1300D27303 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7C6F252ADFFD1300D27303 /* Common.swift */; };
 		BEDB60642ACB083E00E30889 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDB60632ACB083E00E30889 /* AppDelegate.swift */; };
@@ -91,6 +92,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE43CC8D2ACC4DB8007485D2 /* FirebaseAnalytics in Frameworks */,
+				BE6A19DB2AE291060000809C /* Lottie in Frameworks */,
 				BE43CC932ACC4DB8007485D2 /* FirebaseStorage in Frameworks */,
 				BE43CC8F2ACC4DB8007485D2 /* FirebaseAuth in Frameworks */,
 				BE43CC912ACC4DB8007485D2 /* FirebaseFirestore in Frameworks */,
@@ -220,6 +222,7 @@
 				BE43CC922ACC4DB8007485D2 /* FirebaseStorage */,
 				BE49DF052ACF7F3A00AFD56E /* SDWebImage */,
 				BE49DF072ACF7F3A00AFD56E /* SDWebImageMapKit */,
+				BE6A19DA2AE291060000809C /* Lottie */,
 			);
 			productName = FireBaseInstagramClone;
 			productReference = BEDB60602ACB083E00E30889 /* FireBaseInstagramClone.app */;
@@ -296,6 +299,7 @@
 			packageReferences = (
 				BE43CC8B2ACC4DB8007485D2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				BE49DF042ACF7F3A00AFD56E /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				BE6A19D92AE291060000809C /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = BEDB60612ACB083E00E30889 /* Products */;
 			projectDirPath = "";
@@ -721,6 +725,14 @@
 				minimumVersion = 5.18.2;
 			};
 		};
+		BE6A19D92AE291060000809C /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.3.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -753,6 +765,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BE49DF042ACF7F3A00AFD56E /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImageMapKit;
+		};
+		BE6A19DA2AE291060000809C /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BE6A19D92AE291060000809C /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
